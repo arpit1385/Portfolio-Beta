@@ -25,6 +25,7 @@ export interface ProjectItem {
     problem: string;
     approach: string;
     impact: string;
+    futureImprovements?: string;
   };
   link?: string;
 }
@@ -33,5 +34,5 @@ export interface BootLog {
   id: number;
   text: string;
   delay: number;
-  type: 'info' | 'warning' | 'success' | 'error';
+  type: 'info' | 'warning' | 'success' | 'error' | 'system';
 }

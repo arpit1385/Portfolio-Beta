@@ -11,41 +11,43 @@ import Education from './components/sections/Education';
 import Contact from './components/sections/Contact';
 
 const App: React.FC = () => {
-  // Check if session storage has "booted" to skip animation on refresh if desired
-  // For this demo, we default to false to show the effect.
   const [bootStatus, setBootStatus] = useState<'booting' | 'complete'>('booting');
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
-        // The command palette toggle is handled inside Layout via a custom event or prop drilling.
-        // Since the Layout controls the state, we'd typically use Context. 
-        // However, for simplicity, the Layout component listens to the button click.
-        // If we wanted global shortcut, we'd lift the state here.
-        // We will rely on the button in the header for now to keep it simple, 
-        // or let the user discover the button.
+        // Trigger command palette via custom event if needed
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  if (bootStatus === 'booting') {
-    return <BootScreen onComplete={() => setBootStatus('complete')} />;
-  }
-
   return (
-    <Layout>
-      <Hero />
-      <Achievements />
-      <About />
-      <Skills />
-      <Experience />
-      <Projects />
-      <Education />
-      <Contact />
-    </Layout>
+    <>
+      {bootStatus === 'booting' && (
+        <BootScreen onComplete={() => setBootStatus('complete')} />
+      )}
+      
+      {/* 
+        We render the layout always but hide it or show it under the boot screen. 
+        When bootStatus is complete, the boot screen fades out (handled inside BootScreen) 
+        and unmounts, revealing this layer.
+      */}
+      <div className={`transition-opacity duration-1000 ${bootStatus === 'complete' ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+        <Layout>
+          <Hero />
+          <Achievements />
+          <About />
+          <Skills />
+          <Experience />
+          <Projects />
+          <Education />
+          <Contact />
+        </Layout>
+      </div>
+    </>
   );
 };
 

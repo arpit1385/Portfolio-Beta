@@ -2,19 +2,20 @@ import { BootLog, ExperienceItem, ProjectItem, SkillModule } from './types';
 import { Award, Shield, Terminal, Zap, BookOpen } from 'lucide-react';
 
 export const BOOT_SEQUENCE: BootLog[] = [
-  { id: 1, text: 'Initializing ARPIT-OS v2.6.5 (Cybersecurity Edition)...', delay: 500, type: 'info' },
-  { id: 2, text: 'Loading kernel: Cybersecurity_Engineer...', delay: 800, type: 'info' },
-  { id: 3, text: 'Mounting file system: /home/arpit...', delay: 1100, type: 'info' },
-  { id: 4, text: 'Checking memory integrity... OK', delay: 1300, type: 'success' },
-  { id: 5, text: 'Starting service: Threat_Detection_Platform.service', delay: 1800, type: 'info' },
-  { id: 6, text: 'Starting service: Asset_Discovery_Pipeline.service', delay: 2200, type: 'info' },
-  { id: 7, text: 'Loading module: CEH.cert... [LOADED]', delay: 2600, type: 'success' },
-  { id: 8, text: 'Loading module: PQC_Research.paper (IEEE)... [LOADED]', delay: 2900, type: 'success' },
-  { id: 9, text: 'Note: Curiosity module enabled (non-disableable).', delay: 3400, type: 'warning' },
-  { id: 10, text: 'Warning: Perfectionism level high. Monitoring system load...', delay: 3800, type: 'warning' },
-  { id: 11, text: 'Connecting to global threat feed... [CONNECTED]', delay: 4200, type: 'success' },
-  { id: 12, text: 'System Ready.', delay: 4500, type: 'success' },
-  { id: 13, text: 'User: arpitsivakumar@cyber-lab logged in.', delay: 4600, type: 'info' },
+  { id: 1, text: 'Initializing ARPIT-OS v2.6.5 (Cybersecurity Edition)...', delay: 200, type: 'system' },
+  { id: 2, text: 'Loading kernel: Cybersecurity_Engineer...', delay: 600, type: 'info' },
+  { id: 3, text: 'Mounting file system: /home/arpit...', delay: 1000, type: 'info' },
+  { id: 4, text: 'Verifying integrity of core modules...', delay: 1400, type: 'warning' },
+  { id: 5, text: 'Warning: Coffee levels critical. Continuing anyway.', delay: 1800, type: 'warning' },
+  { id: 6, text: 'Starting daemon: curiosity_service... [OK]', delay: 2200, type: 'success' },
+  { id: 7, text: 'Starting service: Threat_Detection_Platform.service', delay: 2600, type: 'info' },
+  { id: 8, text: 'Starting service: Asset_Discovery_Pipeline.service', delay: 2900, type: 'info' },
+  { id: 9, text: 'Loading module: CEH.cert... [LOADED]', delay: 3300, type: 'success' },
+  { id: 10, text: 'Loading module: PQC_Research.paper (IEEE)... [LOADED]', delay: 3600, type: 'success' },
+  { id: 11, text: 'Note: Perfectionism level high. Optimizing UI...', delay: 4000, type: 'system' },
+  { id: 12, text: 'Connecting to global threat feed... [CONNECTED]', delay: 4400, type: 'success' },
+  { id: 13, text: 'System Ready.', delay: 4700, type: 'success' },
+  { id: 14, text: 'User: arpitsivakumar@cyber-lab logged in.', delay: 4800, type: 'info' },
 ];
 
 export const SKILLS: SkillModule[] = [
@@ -38,11 +39,14 @@ export const SKILLS: SkillModule[] = [
   { name: 'Docker & K8s', category: 'infra' },
   { name: 'Azure', category: 'infra' },
   { name: 'TCP/IP & Networking', category: 'infra' },
-  // Foundation
-  { name: 'SIEM & SOC Workflows', category: 'foundation' },
-  { name: 'Incident Response', category: 'foundation' },
-  { name: 'OWASP Top 10', category: 'foundation' },
-  { name: 'MITRE ATT&CK', category: 'foundation' },
+  // Foundation (Freshers)
+  { name: 'Network Security (OSI, Subnets)', category: 'foundation', description: 'Deep understanding of TCP/IP stack' },
+  { name: 'Incident Response Lifecycle', category: 'foundation', description: 'Preparation, Detection, Analysis, Containment' },
+  { name: 'OWASP Top 10', category: 'foundation', description: 'Web app vulnerability mitigation' },
+  { name: 'MITRE ATT&CK', category: 'foundation', description: 'TTPs & Threat Actor behavior' },
+  { name: 'IAM Concepts', category: 'foundation', description: 'AuthN vs AuthZ, Least Privilege' },
+  { name: 'Secure Coding Practices', category: 'foundation', description: 'Input validation, Output encoding' },
+  { name: 'SOC Workflows', category: 'foundation', description: 'L1/L2 Triage & Escalation' },
 ];
 
 export const EXPERIENCE: ExperienceItem[] = [
@@ -87,7 +91,8 @@ export const PROJECTS: ProjectItem[] = [
     longDescription: {
       problem: 'Existing monitoring solutions produced excessive noise, making it difficult to identify genuine threats in a network of 65+ Linux nodes.',
       approach: 'Implemented a Splunk-based SIEM with NIST-aligned correlation rules. Developed Python scripts for log parsing and alert enrichment using external threat intel feeds.',
-      impact: 'Reduced false positives by 43% and achieved 35% better anomaly detection accuracy.'
+      impact: 'Reduced false positives by 43% and achieved 35% better anomaly detection accuracy.',
+      futureImprovements: 'Implement machine learning models for behavioral anomaly detection to further reduce reliance on static thresholds.'
     }
   },
   {
@@ -98,7 +103,8 @@ export const PROJECTS: ProjectItem[] = [
     longDescription: {
       problem: 'Manual reconnaissance is time-consuming and prone to missing shadow IT assets.',
       approach: 'Engineered a Python automation framework integrating Subfinder, Shodan, Nmap, and Wappalyzer. Added task queue orchestration for scalability.',
-      impact: 'Discovered 100+ previously unknown assets with 98% precision in lab testing.'
+      impact: 'Discovered 100+ previously unknown assets with 98% precision in lab testing.',
+      futureImprovements: 'Add web vulnerability scanning integration (Nuclei) to automatically scan discovered assets for low-hanging fruit.'
     }
   }
 ];
@@ -127,9 +133,9 @@ export const ACHIEVEMENTS = [
   },
   {
     id: 4,
-    title: 'Impact',
+    title: 'False Positive Reduction',
     value: '43%',
-    description: 'Reduction in false positives achieved during NPCIL internship.',
+    description: 'Reduction in SIEM noise achieved during NPCIL internship.',
     icon: Zap
   }
 ];

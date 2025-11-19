@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { SKILLS } from '../../constants';
-import { SkillModule } from '../../types';
 
 const Skills = () => {
   const [filter, setFilter] = useState<string>('all');
 
   const categories = [
     { id: 'all', label: 'ALL_MODULES' },
+    { id: 'foundation', label: 'FUNDAMENTALS' },
     { id: 'core', label: 'CORE' },
     { id: 'tools', label: 'TOOLS' },
     { id: 'infra', label: 'INFRASTRUCTURE' },
     { id: 'cert', label: 'CERTIFICATIONS' },
-    { id: 'foundation', label: 'FUNDAMENTALS' },
   ];
 
   const filteredSkills = filter === 'all' 
@@ -49,24 +48,28 @@ const Skills = () => {
           {filteredSkills.map((skill, idx) => (
             <div 
               key={idx}
-              className="group relative bg-cyber-black border border-cyber-gray p-4 hover:border-cyber-blue transition-all duration-300 overflow-hidden"
+              className={`group relative bg-cyber-black border p-4 transition-all duration-300 overflow-hidden ${
+                skill.category === 'foundation' 
+                  ? 'border-cyber-blue/30 hover:border-cyber-blue' 
+                  : 'border-cyber-gray hover:border-cyber-green'
+              }`}
             >
-              <div className="absolute top-0 right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                <div className="w-2 h-2 bg-cyber-blue rounded-full animate-pulse"></div>
+              <div className={`absolute top-0 right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity ${skill.category === 'foundation' ? 'text-cyber-blue' : 'text-cyber-green'}`}>
+                <div className={`w-2 h-2 rounded-full animate-pulse ${skill.category === 'foundation' ? 'bg-cyber-blue' : 'bg-cyber-green'}`}></div>
               </div>
               
-              <h3 className="text-white font-medium mb-1 group-hover:text-cyber-blue transition-colors">
+              <h3 className="text-white font-medium mb-1 group-hover:text-white transition-colors">
                 {skill.name}
               </h3>
               
-              <p className="text-xs text-cyber-muted font-mono uppercase">
-                {skill.category}
+              <p className={`text-xs font-mono uppercase ${skill.category === 'foundation' ? 'text-cyber-blue' : 'text-cyber-muted'}`}>
+                {skill.category === 'foundation' ? 'CORE_CONCEPT' : skill.category}
               </p>
 
               {skill.description && (
-                <div className="absolute inset-0 bg-cyber-blue/90 p-4 flex items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="text-cyber-black text-xs font-bold">
-                    {skill.description}
+                <div className="absolute inset-0 bg-cyber-black/95 p-4 flex items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-cyber-gray">
+                  <p className="text-cyber-green text-xs font-mono">
+                    &gt; {skill.description}
                   </p>
                 </div>
               )}

@@ -8,9 +8,9 @@ interface TerminalProps {
 }
 
 const Terminal: React.FC<TerminalProps> = ({ isOpen, onClose, onNavigate }) => {
-  const [history, setHistory] = useState<string[]>([
-    'ARPIT-OS Command Line Interface v1.0',
-    'Type "help" for available commands.',
+  const [history, setHistory] = useState<Array<{text: string, type?: 'input' | 'output' | 'error'}>>([
+    { text: 'ARPIT-OS Command Line Interface v1.0', type: 'output' },
+    { text: 'Type "help" for available commands.', type: 'output' },
   ]);
   const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -29,21 +29,21 @@ const Terminal: React.FC<TerminalProps> = ({ isOpen, onClose, onNavigate }) => {
   const handleCommand = (e: React.FormEvent) => {
     e.preventDefault();
     const cmd = input.trim().toLowerCase();
-    const newHistory = [...history, `arpit@os:~$ ${input}`];
+    const newHistory = [...history, { text: `arpit@os:~$ ${input}`, type: 'input' as const }];
 
     switch (cmd) {
       case 'help':
         newHistory.push(
-          'Available commands:',
-          '  about        - View system profile',
-          '  skills       - List loaded modules',
-          '  experience   - View active services',
-          '  projects     - List installed applications',
-          '  htb          - HackTheBox status',
-          '  pqc          - Research paper info',
-          '  contact      - Initiate secure session',
-          '  clear        - Clear terminal',
-          '  exit         - Close terminal'
+          { text: 'Available commands:', type: 'output' },
+          { text: '  about        - View system profile', type: 'output' },
+          { text: '  skills       - List loaded modules', type: 'output' },
+          { text: '  projects     - List installed applications', type: 'output' },
+          { text: '  contact      - Initiate secure session', type: 'output' },
+          { text: '  whoami       - Current user info', type: 'output' },
+          { text: '  sudo         - Execute with root privileges', type: 'output' },
+          { text: '  ls           - List directory contents', type: 'output' },
+          { text: '  clear        - Clear terminal', type: 'output' },
+          { text: '  exit         - Close terminal', type: 'output' }
         );
         break;
       case 'clear':
@@ -52,48 +52,50 @@ const Terminal: React.FC<TerminalProps> = ({ isOpen, onClose, onNavigate }) => {
         return;
       case 'about':
         onNavigate('about');
-        newHistory.push('Navigating to System Profile...');
+        newHistory.push({ text: 'Navigating to System Profile...', type: 'output' });
         break;
       case 'skills':
         onNavigate('skills');
-        newHistory.push('Navigating to Modules...');
+        newHistory.push({ text: 'Navigating to Modules...', type: 'output' });
         break;
       case 'experience':
         onNavigate('experience');
-        newHistory.push('Navigating to Services...');
+        newHistory.push({ text: 'Navigating to Services...', type: 'output' });
         break;
       case 'projects':
         onNavigate('projects');
-        newHistory.push('Navigating to Applications...');
+        newHistory.push({ text: 'Navigating to Applications...', type: 'output' });
         break;
       case 'contact':
         onNavigate('contact');
-        newHistory.push('Initializing secure session...');
+        newHistory.push({ text: 'Initializing secure session...', type: 'output' });
         break;
       case 'htb':
         newHistory.push(
-          '--- HackTheBox Status ---',
-          'Rank: Top 50 Globally',
-          'Class: Hacker',
-          'Status: Elite',
-          'Skills: Penetration Testing, CTF, Recon'
+          { text: '--- HackTheBox Status ---', type: 'output' },
+          { text: 'Rank: Top 50 Globally', type: 'output' },
+          { text: 'Class: Hacker', type: 'output' },
+          { text: 'Status: Elite', type: 'output' }
         );
         break;
-      case 'pqc':
-        newHistory.push(
-          '--- Research: Post-Quantum Cryptography ---',
-          'Publication: IEEE',
-          'Role: Lead Author',
-          'Achievement: 57.4% performance improvement in PQC algorithms',
-          'Status: Published'
-        );
+      case 'whoami':
+        newHistory.push({ text: 'uid=1000(arpit) gid=1000(cyber) groups=1000(cyber),27(sudo),100(users)', type: 'output' });
+        break;
+      case 'sudo':
+        newHistory.push({ text: 'arpit is not in the sudoers file. This incident will be reported.', type: 'error' });
+        break;
+      case 'ls':
+        newHistory.push({ text: 'drwxr-xr-x  2 arpit  staff   64B Oct 24 10:00 about/', type: 'output' });
+        newHistory.push({ text: 'drwxr-xr-x  2 arpit  staff   64B Oct 24 10:00 projects/', type: 'output' });
+        newHistory.push({ text: 'drwxr-xr-x  2 arpit  staff   64B Oct 24 10:00 experience/', type: 'output' });
+        newHistory.push({ text: '-rw-r--r--  1 arpit  staff  1.2K Oct 24 10:00 resume.pdf', type: 'output' });
         break;
       case 'exit':
         onClose();
         break;
       default:
         if (cmd !== '') {
-          newHistory.push(`Command not found: ${cmd}. Type "help" for assistance.`);
+          newHistory.push({ text: `Command not found: ${cmd}. Type "help" for assistance.`, type: 'error' });
         }
     }
 
@@ -104,7 +106,7 @@ const Terminal: React.FC<TerminalProps> = ({ isOpen, onClose, onNavigate }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in zoom-in-95 duration-200">
       <div className="w-full max-w-3xl bg-cyber-black border border-cyber-green/50 shadow-[0_0_30px_rgba(0,255,65,0.2)] rounded-lg overflow-hidden flex flex-col h-[500px]">
         <div className="bg-cyber-gray px-4 py-2 flex justify-between items-center border-b border-cyber-green/30">
           <span className="text-cyber-green font-mono text-sm">root@arpit-os:~</span>
@@ -114,7 +116,12 @@ const Terminal: React.FC<TerminalProps> = ({ isOpen, onClose, onNavigate }) => {
         </div>
         <div className="flex-1 p-4 font-mono text-sm overflow-y-auto bg-opacity-90" onClick={() => inputRef.current?.focus()}>
           {history.map((line, i) => (
-            <div key={i} className="mb-1 text-cyber-text whitespace-pre-wrap">{line}</div>
+            <div key={i} className={`mb-1 whitespace-pre-wrap ${
+              line.type === 'error' ? 'text-red-500' : 
+              line.type === 'input' ? 'text-cyber-text' : 'text-cyber-green'
+            }`}>
+              {line.text}
+            </div>
           ))}
           <div ref={bottomRef} />
           <form onSubmit={handleCommand} className="flex mt-2">
