@@ -1,10 +1,12 @@
+
 import React, { useState } from 'react';
 import { SKILLS } from '../../constants';
 
 const Skills = () => {
-  const [filter, setFilter] = useState<string>('all');
+  const [filter, setFilter] = useState<string>('top');
 
   const categories = [
+    { id: 'top', label: 'TOP_SKILLS' },
     { id: 'all', label: 'ALL_MODULES' },
     { id: 'foundation', label: 'FUNDAMENTALS' },
     { id: 'core', label: 'CORE' },
@@ -15,14 +17,38 @@ const Skills = () => {
 
   const filteredSkills = filter === 'all' 
     ? SKILLS 
-    : SKILLS.filter(s => s.category === filter);
+    : filter === 'top'
+      ? SKILLS.filter(s => s.isTop)
+      : SKILLS.filter(s => s.category === filter);
+
+  const getCategoryStyles = (category: string) => {
+    switch(category) {
+      case 'core': return 'border-orange-500/30 text-orange-500 hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.15)] bg-orange-500/5';
+      case 'tools': return 'border-violet-500/30 text-violet-400 hover:border-violet-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.15)] bg-violet-500/5';
+      case 'infra': return 'border-rose-500/30 text-rose-400 hover:border-rose-500 hover:shadow-[0_0_15px_rgba(244,63,94,0.15)] bg-rose-500/5';
+      case 'cert': return 'border-amber-500/30 text-amber-400 hover:border-amber-500 hover:shadow-[0_0_15px_rgba(245,158,11,0.15)] bg-amber-500/5';
+      case 'foundation': return 'border-cyan-500/30 text-cyan-400 hover:border-cyan-500 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] bg-cyan-500/5';
+      default: return 'border-cyber-gray text-cyber-text hover:border-cyber-green bg-cyber-black';
+    }
+  };
+
+  const getIndicatorColor = (category: string) => {
+    switch(category) {
+      case 'core': return 'bg-orange-500';
+      case 'tools': return 'bg-violet-500';
+      case 'infra': return 'bg-rose-500';
+      case 'cert': return 'bg-amber-500';
+      case 'foundation': return 'bg-cyan-500';
+      default: return 'bg-cyber-green';
+    }
+  };
 
   return (
-    <section id="skills" className="py-20 bg-cyber-gray/10">
+    <section id="skills" className="py-20 bg-cyber-gray/10 transition-colors duration-300">
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-8">
           <span className="text-cyber-green text-2xl">02.</span>
-          <h2 className="text-3xl font-bold text-white">Loaded Modules</h2>
+          <h2 className="text-3xl font-bold text-cyber-heading">Loaded Modules</h2>
           <div className="h-[1px] flex-1 bg-cyber-gray/50"></div>
         </div>
 
@@ -48,27 +74,28 @@ const Skills = () => {
           {filteredSkills.map((skill, idx) => (
             <div 
               key={idx}
-              className={`group relative bg-cyber-black border p-4 transition-all duration-300 overflow-hidden ${
-                skill.category === 'foundation' 
-                  ? 'border-cyber-blue/30 hover:border-cyber-blue' 
-                  : 'border-cyber-gray hover:border-cyber-green'
-              }`}
+              className={`group relative border p-6 flex flex-col items-center text-center transition-all duration-300 overflow-hidden rounded-2xl ${getCategoryStyles(skill.category)}`}
             >
-              <div className={`absolute top-0 right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity ${skill.category === 'foundation' ? 'text-cyber-blue' : 'text-cyber-green'}`}>
-                <div className={`w-2 h-2 rounded-full animate-pulse ${skill.category === 'foundation' ? 'bg-cyber-blue' : 'bg-cyber-green'}`}></div>
+              <div className={`absolute top-2 right-2 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
+                <div className={`w-2 h-2 rounded-full animate-pulse ${getIndicatorColor(skill.category)}`}></div>
+              </div>
+
+              <div className="mb-3 transform group-hover:scale-110 transition-transform duration-300">
+                {skill.icon && <skill.icon size={32} />}
+                {skill.iconClass && <i className={`${skill.iconClass} text-3xl`}></i>}
               </div>
               
-              <h3 className="text-white font-medium mb-1 group-hover:text-white transition-colors">
+              <h3 className="font-bold mb-1 text-sm group-hover:text-white transition-colors">
                 {skill.name}
               </h3>
               
-              <p className={`text-xs font-mono uppercase ${skill.category === 'foundation' ? 'text-cyber-blue' : 'text-cyber-muted'}`}>
+              <p className="text-[10px] font-mono uppercase opacity-70">
                 {skill.category === 'foundation' ? 'CORE_CONCEPT' : skill.category}
               </p>
 
               {skill.description && (
-                <div className="absolute inset-0 bg-cyber-black/95 p-4 flex items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-cyber-gray">
-                  <p className="text-cyber-green text-xs font-mono">
+                <div className="absolute inset-0 bg-cyber-black/95 p-4 flex items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-cyber-gray z-10 rounded-2xl">
+                  <p className={`text-xs font-mono ${getCategoryStyles(skill.category).split(' ')[1]}`}>
                     &gt; {skill.description}
                   </p>
                 </div>

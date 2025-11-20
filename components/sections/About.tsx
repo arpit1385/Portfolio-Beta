@@ -3,11 +3,11 @@ import { Cpu, Shield, Globe, Code } from 'lucide-react';
 
 const About = () => {
   return (
-    <section id="about" className="py-20 border-t border-cyber-gray/30">
+    <section id="about" className="py-20 border-t border-cyber-gray/30 transition-colors duration-300">
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-12">
           <span className="text-cyber-green text-2xl">01.</span>
-          <h2 className="text-3xl font-bold text-white">System Profile</h2>
+          <h2 className="text-3xl font-bold text-cyber-heading">System Profile</h2>
           <div className="h-[1px] flex-1 bg-cyber-gray/50"></div>
         </div>
 
@@ -30,7 +30,7 @@ const About = () => {
           {/* Bio Text */}
           <div className="md:col-span-2 space-y-6 text-cyber-muted text-lg font-light">
             <p>
-              I am a <span className="text-white font-medium">Final-year Integrated Masters student</span> in Cybersecurity at VIT Bhopal. My kernel is optimized for threat detection, SIEM engineering, and offensive security.
+              I am a <span className="text-cyber-heading font-medium">Final-year Integrated Masters student</span> in Cybersecurity at VIT Bhopal. My kernel is optimized for threat detection, SIEM engineering, and offensive security.
             </p>
             <p>
               My runtime environment includes hands-on experience from <span className="text-cyber-blue">NPCIL</span>, where I deployed Splunk architectures and hardened critical infrastructure. When I'm not analyzing logs, I'm ranking in the <span className="text-cyber-green">Top 50 on HackTheBox</span> or publishing research on Post-Quantum Cryptography with IEEE.

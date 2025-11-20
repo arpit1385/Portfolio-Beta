@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Send, Mail, Phone, Github, Linkedin } from 'lucide-react';
 
@@ -13,17 +14,17 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 border-t border-cyber-gray/30">
+    <section id="contact" className="py-20 border-t border-cyber-gray/30 transition-colors duration-300">
       <div className="max-w-4xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-12">
-          <span className="text-cyber-green text-2xl">06.</span>
-          <h2 className="text-3xl font-bold text-white">Secure Session Init</h2>
+          <span className="text-cyber-green text-2xl">07.</span>
+          <h2 className="text-3xl font-bold text-cyber-heading">Secure Session Init</h2>
           <div className="h-[1px] flex-1 bg-cyber-gray/50"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
           <div>
-            <h3 className="text-xl font-bold text-white mb-4">Establish Connection</h3>
+            <h3 className="text-xl font-bold text-cyber-heading mb-4">Establish Connection</h3>
             <p className="text-cyber-muted mb-8">
               Open to cybersecurity internships, apprenticeships, and entry-level roles across India.
               Initiate a handshake below.
@@ -38,10 +39,10 @@ const Contact = () => {
               </a>
               <div className="flex gap-4 pt-4">
                 <a href="#" className="p-2 border border-cyber-gray rounded hover:border-cyber-blue hover:text-cyber-blue transition-colors">
-                  <Linkedin size={20} />
+                  <Linkedin size={20} className="text-cyber-text group-hover:text-cyber-blue"/>
                 </a>
                 <a href="#" className="p-2 border border-cyber-gray rounded hover:border-cyber-blue hover:text-cyber-blue transition-colors">
-                  <Github size={20} />
+                  <Github size={20} className="text-cyber-text group-hover:text-cyber-blue"/>
                 </a>
               </div>
             </div>
@@ -52,15 +53,15 @@ const Contact = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block text-xs font-mono text-cyber-green mb-1">USER_ID (Name)</label>
-                  <input type="text" required className="w-full bg-cyber-black border border-cyber-gray focus:border-cyber-green outline-none p-2 text-white text-sm transition-colors" />
+                  <input type="text" required className="w-full bg-cyber-black border border-cyber-gray focus:border-cyber-green outline-none p-2 text-cyber-text text-sm transition-colors" />
                 </div>
                 <div>
                   <label className="block text-xs font-mono text-cyber-green mb-1">SOURCE_IP (Email)</label>
-                  <input type="email" required className="w-full bg-cyber-black border border-cyber-gray focus:border-cyber-green outline-none p-2 text-white text-sm transition-colors" />
+                  <input type="email" required className="w-full bg-cyber-black border border-cyber-gray focus:border-cyber-green outline-none p-2 text-cyber-text text-sm transition-colors" />
                 </div>
                 <div>
                   <label className="block text-xs font-mono text-cyber-green mb-1">PAYLOAD (Message)</label>
-                  <textarea rows={4} required className="w-full bg-cyber-black border border-cyber-gray focus:border-cyber-green outline-none p-2 text-white text-sm transition-colors"></textarea>
+                  <textarea rows={4} required className="w-full bg-cyber-black border border-cyber-gray focus:border-cyber-green outline-none p-2 text-cyber-text text-sm transition-colors"></textarea>
                 </div>
                 <button type="submit" className="w-full bg-cyber-blue/10 border border-cyber-blue text-cyber-blue hover:bg-cyber-blue hover:text-black font-mono py-2 text-sm transition-all flex items-center justify-center gap-2">
                   <Send size={16} /> TRANSMIT_DATA
@@ -79,7 +80,7 @@ const Contact = () => {
                    <>
                     <div className="text-cyber-blue">Message queued successfully.</div>
                     <p className="text-xs text-cyber-muted">(This is a demo environment)</p>
-                    <button onClick={() => setStatus('idle')} className="text-xs underline hover:text-white mt-4">Send another</button>
+                    <button onClick={() => setStatus('idle')} className="text-xs underline hover:text-cyber-heading mt-4">Send another</button>
                    </>
                 )}
               </div>

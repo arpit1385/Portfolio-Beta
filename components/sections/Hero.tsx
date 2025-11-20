@@ -3,11 +3,11 @@ import { Download, Terminal } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center py-20 relative overflow-hidden">
+    <section id="hero" className="min-h-screen flex items-center justify-center py-20 relative overflow-hidden transition-colors duration-300">
       {/* Background Grid */}
       <div className="absolute inset-0 z-0 opacity-10" 
            style={{ 
-             backgroundImage: 'linear-gradient(#00ff41 1px, transparent 1px), linear-gradient(90deg, #00ff41 1px, transparent 1px)', 
+             backgroundImage: 'linear-gradient(rgb(var(--cyber-green)) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--cyber-green)) 1px, transparent 1px)', 
              backgroundSize: '40px 40px' 
            }}>
       </div>
@@ -19,7 +19,7 @@ const Hero = () => {
           <div className="inline-block px-3 py-1 border border-cyber-green/50 rounded-full text-cyber-green text-xs font-mono bg-cyber-green/10 mb-2">
             SYSTEM_STATUS: ONLINE
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-cyber-heading">
             ARPIT <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyber-green to-cyber-blue">
               SIVAKUMAR
@@ -35,9 +35,9 @@ const Hero = () => {
           <div className="flex flex-wrap gap-4 pt-4">
             <button 
                onClick={() => document.getElementById('contact')?.scrollIntoView({behavior: 'smooth'})}
-               className="group relative px-6 py-3 bg-cyber-green/10 text-cyber-green border border-cyber-green font-mono text-sm uppercase hover:bg-cyber-green hover:text-black transition-all duration-300"
+               className="group relative px-6 py-3 bg-cyber-green/10 text-cyber-green border border-cyber-green font-mono text-sm uppercase hover:bg-cyber-green hover:text-cyber-black transition-all duration-300"
             >
-              <span className="absolute inset-0 w-full h-full bg-cyber-green/20 blur opacity-0 group-hover:opacity-100 transition-opacity"></span>
+              <span className="absolute inset-0 w-full h-full bg-cyber-green/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity"></span>
               Initialize_Contact()
             </button>
             <a 
@@ -55,7 +55,7 @@ const Hero = () => {
            <div className="absolute -top-4 -right-4 w-20 h-20 border-t-2 border-r-2 border-cyber-blue/50 rounded-tr-xl"></div>
            <div className="absolute -bottom-4 -left-4 w-20 h-20 border-b-2 border-l-2 border-cyber-green/50 rounded-bl-xl"></div>
 
-           <div className="bg-cyber-gray/80 backdrop-blur-md border border-cyber-gray p-6 rounded-lg shadow-2xl font-mono text-sm">
+           <div className="bg-cyber-dark/90 backdrop-blur-sm border border-cyber-gray p-6 rounded-lg shadow-2xl font-mono text-sm">
               <div className="border-b border-cyber-gray mb-4 pb-2 flex justify-between text-xs text-cyber-muted">
                 <span>KERNEL_INFO</span>
                 <span>PID: 1024</span>
@@ -64,11 +64,11 @@ const Hero = () => {
               <div className="space-y-4">
                 <div className="grid grid-cols-[100px_1fr] gap-2">
                   <span className="text-cyber-green">User:</span>
-                  <span className="text-white">arpit.sivakumar</span>
+                  <span className="text-cyber-text">arpit.sivakumar</span>
                 </div>
                 <div className="grid grid-cols-[100px_1fr] gap-2">
                   <span className="text-cyber-green">Role:</span>
-                  <span className="text-white">Security Engineer / Threat Hunter</span>
+                  <span className="text-cyber-text">Security Engineer / Threat Hunter</span>
                 </div>
                 <div className="grid grid-cols-[100px_1fr] gap-2">
                   <span className="text-cyber-green">CPU Focus:</span>
@@ -84,7 +84,7 @@ const Hero = () => {
                 </div>
                 <div className="grid grid-cols-[100px_1fr] gap-2">
                   <span className="text-cyber-green">Location:</span>
-                  <span className="text-white">Bhopal, IN (Remote Ready)</span>
+                  <span className="text-cyber-text">Bhopal, IN (Remote Ready)</span>
                 </div>
               </div>
 

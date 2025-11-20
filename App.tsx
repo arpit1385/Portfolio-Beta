@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import BootScreen from './components/BootScreen';
 import Layout from './components/Layout';
@@ -9,6 +10,7 @@ import Projects from './components/sections/Projects';
 import Achievements from './components/sections/Achievements';
 import Education from './components/sections/Education';
 import Contact from './components/sections/Contact';
+import Languages from './components/sections/Languages';
 
 const App: React.FC = () => {
   const [bootStatus, setBootStatus] = useState<'booting' | 'complete'>('booting');
@@ -44,6 +46,7 @@ const App: React.FC = () => {
           <Experience />
           <Projects />
           <Education />
+          <Languages />
           <Contact />
         </Layout>
       </div>

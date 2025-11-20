@@ -8,20 +8,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             colors: {
               cyber: {
-                black: '#050505',
-                dark: '#0a0a0a',
-                gray: '#1a1a1a',
-                green: '#00ff41',
-                greenDim: '#008F11',
-                blue: '#0ea5e9',
-                text: '#e2e8f0',
-                muted: '#94a3b8'
+                black: 'rgb(var(--cyber-black) / <alpha-value>)',
+                dark: 'rgb(var(--cyber-dark) / <alpha-value>)',
+                gray: 'rgb(var(--cyber-gray) / <alpha-value>)',
+                green: 'rgb(var(--cyber-green) / <alpha-value>)',
+                greenDim: 'rgb(var(--cyber-green-dim) / <alpha-value>)',
+                blue: 'rgb(var(--cyber-blue) / <alpha-value>)',
+                text: 'rgb(var(--cyber-text) / <alpha-value>)',
+                muted: 'rgb(var(--cyber-muted) / <alpha-value>)',
+                heading: 'rgb(var(--cyber-heading) / <alpha-value>)'
               }
             },
             fontFamily: {
@@ -48,19 +51,45 @@
       }
     </script>
     <style>
+      :root {
+        /* Default Dark Theme (RGB values) */
+        --cyber-black: 5 5 5;         /* #050505 */
+        --cyber-dark: 10 10 10;       /* #0a0a0a */
+        --cyber-gray: 26 26 26;       /* #1a1a1a */
+        --cyber-green: 0 255 65;      /* #00ff41 */
+        --cyber-green-dim: 0 143 17;  /* #008F11 */
+        --cyber-blue: 14 165 233;     /* #0ea5e9 */
+        --cyber-text: 226 232 240;    /* #e2e8f0 */
+        --cyber-muted: 148 163 184;   /* #94a3b8 */
+        --cyber-heading: 255 255 255; /* #ffffff */
+      }
+
+      html.light {
+        /* Light Theme (RGB values) */
+        --cyber-black: 240 242 245;   /* #f0f2f5 */
+        --cyber-dark: 255 255 255;    /* #ffffff */
+        --cyber-gray: 203 213 225;    /* #cbd5e1 */
+        --cyber-green: 21 128 61;     /* #15803d */
+        --cyber-green-dim: 22 101 52; /* #166534 */
+        --cyber-blue: 2 132 199;      /* #0284c7 */
+        --cyber-text: 51 65 85;       /* #334155 */
+        --cyber-muted: 100 116 139;   /* #64748b */
+        --cyber-heading: 15 23 42;    /* #0f172a */
+      }
+
       /* Custom Scrollbar */
       ::-webkit-scrollbar {
         width: 8px;
       }
       ::-webkit-scrollbar-track {
-        background: #0a0a0a; 
+        background: rgb(var(--cyber-dark)); 
       }
       ::-webkit-scrollbar-thumb {
         background: #333; 
         border-radius: 4px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #00ff41; 
+        background: rgb(var(--cyber-green)); 
       }
       
       .crt::before {
@@ -76,6 +105,11 @@
         background-size: 100% 2px, 3px 100%;
         pointer-events: none;
       }
+      
+      /* Disable CRT scanlines in light mode */
+      html.light .crt::before {
+        display: none;
+      }
     </style>
   <script type="importmap">
 {
@@ -88,7 +122,7 @@
 }
 </script>
 </head>
-  <body class="bg-cyber-black text-cyber-text antialiased">
+  <body class="bg-cyber-black text-cyber-text antialiased transition-colors duration-300">
     <div id="root"></div>
   </body>
 </html>

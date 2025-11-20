@@ -6,11 +6,11 @@ const Experience = () => {
   const [expandedId, setExpandedId] = useState<string | null>('npcil');
 
   return (
-    <section id="experience" className="py-20">
+    <section id="experience" className="py-20 transition-colors duration-300">
       <div className="max-w-4xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-12">
           <span className="text-cyber-green text-2xl">03.</span>
-          <h2 className="text-3xl font-bold text-white">Active Services</h2>
+          <h2 className="text-3xl font-bold text-cyber-heading">Active Services</h2>
           <div className="h-[1px] flex-1 bg-cyber-gray/50"></div>
         </div>
 
@@ -21,12 +21,12 @@ const Experience = () => {
               <div className={`absolute left-[-5px] md:left-[-5px] top-6 w-3 h-3 rounded-full border-2 ${expandedId === exp.id ? 'bg-cyber-green border-cyber-green shadow-[0_0_10px_#00ff41]' : 'bg-cyber-black border-cyber-muted'}`}></div>
 
               <div 
-                className={`bg-cyber-gray/20 border ${expandedId === exp.id ? 'border-cyber-green/40' : 'border-cyber-gray/40'} rounded-lg p-6 cursor-pointer transition-all duration-300 hover:bg-cyber-gray/30`}
+                className={`bg-cyber-gray/10 border ${expandedId === exp.id ? 'border-cyber-green/40' : 'border-cyber-gray/40'} rounded-lg p-6 cursor-pointer transition-all duration-300 hover:bg-cyber-gray/20`}
                 onClick={() => setExpandedId(expandedId === exp.id ? null : exp.id)}
               >
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-2">
                   <div>
-                    <h3 className="text-xl text-white font-bold flex items-center gap-2">
+                    <h3 className="text-xl text-cyber-heading font-bold flex items-center gap-2">
                       {exp.title}
                       {exp.status === 'active' && <span className="text-[10px] text-cyber-black bg-cyber-green px-2 py-0.5 rounded-full font-mono">RUNNING</span>}
                       {exp.status === 'inactive' && <span className="text-[10px] text-cyber-text bg-cyber-gray px-2 py-0.5 rounded-full font-mono">STOPPED</span>}

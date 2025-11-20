@@ -1,8 +1,12 @@
+
 export interface SkillModule {
   name: string;
   category: 'core' | 'tools' | 'foundation' | 'cert' | 'infra';
   level?: number; // 1-100
   description?: string;
+  icon?: any; // React component for Lucide
+  iconClass?: string; // CSS class for Devicon
+  isTop?: boolean;
 }
 
 export interface ExperienceItem {

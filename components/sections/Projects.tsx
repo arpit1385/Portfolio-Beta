@@ -7,11 +7,11 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
 
   return (
-    <section id="projects" className="py-20 bg-cyber-black">
+    <section id="projects" className="py-20 bg-cyber-black transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-12">
           <span className="text-cyber-green text-2xl">04.</span>
-          <h2 className="text-3xl font-bold text-white">Installed Applications</h2>
+          <h2 className="text-3xl font-bold text-cyber-heading">Installed Applications</h2>
           <div className="h-[1px] flex-1 bg-cyber-gray/50"></div>
         </div>
 
@@ -36,7 +36,7 @@ const Projects = () => {
                 </div>
               </div>
 
-              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyber-green transition-colors relative z-10">
+              <h3 className="text-xl font-bold text-cyber-heading mb-2 group-hover:text-cyber-green transition-colors relative z-10">
                 {project.title}
               </h3>
               
@@ -69,12 +69,12 @@ const Projects = () => {
           <div className="bg-cyber-black border border-cyber-green w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-lg shadow-[0_0_50px_rgba(0,255,65,0.15)] flex flex-col">
             
             {/* Modal Header */}
-            <div className="bg-cyber-gray/20 p-4 flex justify-between items-center border-b border-cyber-green/30 sticky top-0 backdrop-blur bg-opacity-90 z-10">
+            <div className="bg-cyber-black/90 p-4 flex justify-between items-center border-b border-cyber-green/30 sticky top-0 z-10">
               <div className="flex items-center gap-3">
                  <Terminal size={18} className="text-cyber-green" />
                  <h3 className="text-cyber-green font-mono text-sm">root@arpit-os:~/projects/{selectedProject.id}</h3>
               </div>
-              <button onClick={() => setSelectedProject(null)} className="text-cyber-muted hover:text-white font-mono text-sm">
+              <button onClick={() => setSelectedProject(null)} className="text-cyber-muted hover:text-cyber-heading font-mono text-sm">
                 [X] CLOSE
               </button>
             </div>
@@ -82,7 +82,7 @@ const Projects = () => {
             <div className="p-6 md:p-8 space-y-8">
               {/* Header Section */}
               <div>
-                <h2 className="text-3xl font-bold text-white mb-2">{selectedProject.title}</h2>
+                <h2 className="text-3xl font-bold text-cyber-heading mb-2">{selectedProject.title}</h2>
                 <p className="text-cyber-blue font-light text-lg">
                   {selectedProject.description}
                 </p>
