@@ -35,6 +35,8 @@
               'blink': 'blink 1s step-end infinite',
               'scanline': 'scanline 8s linear infinite',
               'glitch': 'glitch 1s linear infinite',
+              'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             },
             keyframes: {
               blink: {
@@ -44,6 +46,10 @@
               scanline: {
                 '0%': { transform: 'translateY(-100%)' },
                 '100%': { transform: 'translateY(100%)' },
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
               }
             }
           }
@@ -55,7 +61,7 @@
         /* Default Dark Theme (RGB values) */
         --cyber-black: 5 5 5;         /* #050505 */
         --cyber-dark: 10 10 10;       /* #0a0a0a */
-        --cyber-gray: 26 26 26;       /* #1a1a1a */
+        --cyber-gray: 38 38 38;       /* #262626 - Slightly lighter for better borders */
         --cyber-green: 0 255 65;      /* #00ff41 */
         --cyber-green-dim: 0 143 17;  /* #008F11 */
         --cyber-blue: 14 165 233;     /* #0ea5e9 */
@@ -66,32 +72,33 @@
 
       html.light {
         /* Light Theme (RGB values) */
-        --cyber-black: 240 242 245;   /* #f0f2f5 */
+        --cyber-black: 248 250 252;   /* #f8fafc */
         --cyber-dark: 255 255 255;    /* #ffffff */
         --cyber-gray: 203 213 225;    /* #cbd5e1 */
-        --cyber-green: 21 128 61;     /* #15803d */
-        --cyber-green-dim: 22 101 52; /* #166534 */
+        --cyber-green: 22 163 74;     /* #16a34a - Darker green for readability */
+        --cyber-green-dim: 21 128 61; /* #15803d */
         --cyber-blue: 2 132 199;      /* #0284c7 */
         --cyber-text: 51 65 85;       /* #334155 */
         --cyber-muted: 100 116 139;   /* #64748b */
         --cyber-heading: 15 23 42;    /* #0f172a */
       }
 
-      /* Custom Scrollbar */
+      /* Custom Scrollbar - Sleeker */
       ::-webkit-scrollbar {
-        width: 8px;
+        width: 6px;
       }
       ::-webkit-scrollbar-track {
-        background: rgb(var(--cyber-dark)); 
+        background: rgb(var(--cyber-black)); 
       }
       ::-webkit-scrollbar-thumb {
-        background: #333; 
-        border-radius: 4px;
+        background: rgb(var(--cyber-gray)); 
+        border-radius: 3px;
       }
       ::-webkit-scrollbar-thumb:hover {
         background: rgb(var(--cyber-green)); 
       }
       
+      /* CRT Effect - Subtler */
       .crt::before {
         content: " ";
         display: block;
@@ -100,7 +107,7 @@
         left: 0;
         bottom: 0;
         right: 0;
-        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
         z-index: 50;
         background-size: 100% 2px, 3px 100%;
         pointer-events: none;
@@ -110,19 +117,33 @@
       html.light .crt::before {
         display: none;
       }
+
+      /* Smooth Text Rendering */
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      ::selection {
+        background: rgba(var(--cyber-green), 0.2);
+        color: rgb(var(--cyber-heading));
+      }
     </style>
-  <script type="importmap">
+<script type="importmap">
 {
   "imports": {
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
+    "vite": "https://aistudiocdn.com/vite@^7.2.4",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
     "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0"
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
   }
 }
 </script>
 </head>
   <body class="bg-cyber-black text-cyber-text antialiased transition-colors duration-300">
     <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>

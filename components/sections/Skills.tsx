@@ -44,7 +44,7 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="py-20 bg-cyber-gray/10 transition-colors duration-300">
+    <section id="skills" className="py-20 bg-cyber-gray/5 transition-colors duration-300">
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-8">
           <span className="text-cyber-green text-2xl">02.</span>
@@ -53,34 +53,35 @@ const Skills = () => {
         </div>
 
         {/* Filters */}
-        <div className="flex flex-wrap gap-2 mb-12">
+        <div className="flex flex-wrap gap-2 mb-12 justify-center md:justify-start">
           {categories.map(cat => (
             <button
               key={cat.id}
               onClick={() => setFilter(cat.id)}
-              className={`px-4 py-2 text-xs font-mono transition-all duration-200 border ${
+              className={`px-4 py-2 text-xs font-mono transition-all duration-200 border rounded-full ${
                 filter === cat.id 
-                  ? 'bg-cyber-green text-cyber-black border-cyber-green' 
+                  ? 'bg-cyber-green text-cyber-black border-cyber-green font-bold shadow-[0_0_10px_rgba(0,255,65,0.3)]' 
                   : 'bg-transparent text-cyber-muted border-cyber-gray hover:border-cyber-green hover:text-cyber-green'
               }`}
             >
-              [{cat.label}]
+              {cat.label}
             </button>
           ))}
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredSkills.map((skill, idx) => (
             <div 
               key={idx}
-              className={`group relative border p-6 flex flex-col items-center text-center transition-all duration-300 overflow-hidden rounded-2xl ${getCategoryStyles(skill.category)}`}
+              className={`group relative border p-6 flex flex-col items-center text-center transition-all duration-300 overflow-hidden rounded-2xl animate-fade-in-up ${getCategoryStyles(skill.category)}`}
+              style={{ animationDelay: `${idx * 50}ms` }}
             >
-              <div className={`absolute top-2 right-2 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
+              <div className={`absolute top-3 right-3 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
                 <div className={`w-2 h-2 rounded-full animate-pulse ${getIndicatorColor(skill.category)}`}></div>
               </div>
 
-              <div className="mb-3 transform group-hover:scale-110 transition-transform duration-300">
+              <div className="mb-4 transform group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300">
                 {skill.icon && <skill.icon size={32} />}
                 {skill.iconClass && <i className={`${skill.iconClass} text-3xl`}></i>}
               </div>
@@ -89,13 +90,13 @@ const Skills = () => {
                 {skill.name}
               </h3>
               
-              <p className="text-[10px] font-mono uppercase opacity-70">
+              <p className="text-[10px] font-mono uppercase opacity-70 tracking-widest">
                 {skill.category === 'foundation' ? 'CORE_CONCEPT' : skill.category}
               </p>
 
               {skill.description && (
-                <div className="absolute inset-0 bg-cyber-black/95 p-4 flex items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-cyber-gray z-10 rounded-2xl">
-                  <p className={`text-xs font-mono ${getCategoryStyles(skill.category).split(' ')[1]}`}>
+                <div className="absolute inset-0 bg-cyber-black/95 backdrop-blur-sm p-4 flex items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 rounded-2xl cursor-default">
+                  <p className={`text-xs font-mono leading-relaxed ${getCategoryStyles(skill.category).split(' ')[1]}`}>
                     &gt; {skill.description}
                   </p>
                 </div>
